@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "posts", uniqueConstraints = {@UniqueConstraint(columnNames = {"title"})})
+@Table(name = "posts")
 public class Post {
 
     @Id
@@ -64,7 +64,9 @@ public class Post {
     public Post() {
     }
 
-    public Post(String title) {
+    public Post(String title, String body, String image) {
         this.title = title;
+        this.body = body;
+        this.image = image;
     }
 }

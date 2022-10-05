@@ -12,24 +12,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/forum/posts")
+@RequestMapping("/forum")
 public class PostController {
 
     @Autowired
     PostService postService;
 
-    @GetMapping
+    @GetMapping("/posts")
     public List<Post> getPosts() {
         return postService.getPosts();
     }
 
-    @PostMapping("/{threadId}/add")
-    public ResponseEntity<Post> savePost(@RequestBody Post post,
+    @PostMapping("threads/{threadId}")
+    public ResponseEntity<String> savePost(@RequestBody Post post,
                                          @PathVariable(value = "threadId") int threadId) {
-        return new ResponseEntity<>(postService.createPost(post, threadId), HttpStatus.CREATED);
+        return postService.createPost(post, threadId);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/posts/{id}")
     public ResponseEntity<String> deletePost(@PathVariable int id) {
         postService.deletePost(id);
         return new ResponseEntity("Post deleted successfully.", HttpStatus.OK);
