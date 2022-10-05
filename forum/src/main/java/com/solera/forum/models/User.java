@@ -1,7 +1,6 @@
 package com.solera.forum.models;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,9 +13,7 @@ public class User {
 
     private String username;
     private String password;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Thread> threads = new HashSet<>();
+    private HashSet<ForumThread> threads = new HashSet<>();
 
     public String getEmail() {
         return email;
@@ -42,15 +39,15 @@ public class User {
         this.password = password;
     }
 
-    public Set<Thread> getThreads() {
+    public Set<ForumThread> getThreads() {
         return threads;
     }
 
-    public void setThreads(Set<Thread> threads) {
+    public void setThreads(HashSet<ForumThread> threads) {
         this.threads = threads;
     }
 
-    public User(String email, String username, String password, Set<Thread> threads) {
+    public User(String email, String username, String password, HashSet<ForumThread> threads) {
         this.email = email;
         this.username = username;
         this.password = password;
