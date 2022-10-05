@@ -1,9 +1,12 @@
 package com.solera.forum.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "threads", uniqueConstraints = {@UniqueConstraint(columnNames = {"title"})})
@@ -14,12 +17,15 @@ public class ForumThread {
     private int id;
 
     private String title;
-    private String createdAt;
+    private String creationDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", nullable = false)
     @JsonIgnore
     private User user;
+
+    @OneToMany(mappedBy = "thread", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Post> posts = new HashSet<>();
 
     public int getId() {
         return id;
@@ -29,12 +35,12 @@ public class ForumThread {
         this.id = id;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
+    public String getCreationDate() {
+        return creationDate;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+    public void setCreationDate(String creationDate) {
+        this.creationDate = creationDate;
     }
 
     public String getTitle() {

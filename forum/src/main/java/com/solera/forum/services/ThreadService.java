@@ -31,4 +31,8 @@ public class ThreadService {
     public List<ForumThread> getThreads() {
         return threadRepository.findAll();
     }
+
+    public void deleteThread(int id) {
+        threadRepository.deleteById(id);
+    }
 }
