@@ -20,4 +20,12 @@ public class UserService {
     public List<User> getUsers() {
         return userRepository.findAll();
     }
+
+    public User getUser(int id) {
+        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    public void deleteUser(int id) {
+        userRepository.deleteById(id);
+    }
 }

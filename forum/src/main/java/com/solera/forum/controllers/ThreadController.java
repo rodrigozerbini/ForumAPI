@@ -18,14 +18,19 @@ public class ThreadController {
     @Autowired
     ThreadService threadService;
 
-    @PostMapping
-    public ResponseEntity<ForumThread> saveThread(@RequestBody ForumThread thread) {
-        return new ResponseEntity<>(threadService.createThread(thread), HttpStatus.CREATED);
-    }
-
     @GetMapping
     public List<ForumThread> getThreads() {
         return threadService.getThreads();
+    }
+
+    @PostMapping("users/{userId}")
+    public ResponseEntity<ForumThread> saveThread(@RequestBody ForumThread thread,
+                                                  @PathVariable(value = "userId") int userId) {
+        if (thread == null) {
+            return new ResponseEntity<ForumThread>(HttpStatus.NOT_FOUND);
+        }
+        ResponseEntity<ForumThread> newThread = new ResponseEntity<>(threadService.createThread(thread, userId), HttpStatus.CREATED);
+        return newThread;
     }
 
 }

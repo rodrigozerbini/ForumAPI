@@ -9,11 +9,14 @@ import java.util.Set;
 public class User {
 
     @Id
-    private String email;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
+    private String email;
     private String username;
     private String password;
-    private HashSet<ForumThread> threads = new HashSet<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ForumThread> threads = new HashSet<>();
 
     public String getEmail() {
         return email;
@@ -35,6 +38,14 @@ public class User {
         return password;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setPassword(String password) {
         this.password = password;
     }
@@ -47,7 +58,7 @@ public class User {
         this.threads = threads;
     }
 
-    public User(String email, String username, String password, HashSet<ForumThread> threads) {
+    public User(String email, String username, String password, Set<ForumThread> threads) {
         this.email = email;
         this.username = username;
         this.password = password;

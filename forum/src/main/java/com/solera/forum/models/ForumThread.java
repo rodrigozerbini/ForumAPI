@@ -1,11 +1,9 @@
 package com.solera.forum.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 @Entity
 @Table(name = "threads", uniqueConstraints = {@UniqueConstraint(columnNames = {"title"})})
@@ -15,9 +13,13 @@ public class ForumThread {
     @GeneratedValue(strategy = GenerationType.IDENTITY )
     private int id;
 
-    private String createdAt;
     private String title;
-    private String userEmail;
+    private String createdAt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId", nullable = false)
+    @JsonIgnore
+    private User user;
 
     public int getId() {
         return id;
@@ -43,18 +45,12 @@ public class ForumThread {
         this.title = title;
     }
 
-    public String getUserEmail() {
-        return userEmail;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserEmail(String userEmail) {
-        this.userEmail = userEmail;
-    }
-
-    public ForumThread(String title, String userEmail, String createdAt) {
-        this.title = title;
-        this.userEmail = userEmail;
-        this.createdAt = createdAt;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public ForumThread() {
