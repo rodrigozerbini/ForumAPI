@@ -33,8 +33,14 @@ public class PostService {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("{\"msg\":\"Post with this title already exists in this thread.\"}");
         }
+        else if(hasBannedWord(post)){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("{\"msg\":\"Ooops, you can't use bad words in your post.\"}");
+        }
         else {
             post.setThread(thread.get());
+            thread.get().getPosts().add(post);
+            postRepository.save(post);
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body("{\"msg\":\"Post created successfully.\"}");
         }

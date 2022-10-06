@@ -56,7 +56,7 @@ public class ThreadService {
 
     public ResponseEntity deleteThread(int id) {
         Optional<ForumThread> thread = threadRepository.findById(id);
-        if(thread.isEmpty()){
+        if(thread.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"msg\":\"Thread not found.\"}");
         }
         threadRepository.deleteById(id);

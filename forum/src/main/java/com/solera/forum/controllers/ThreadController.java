@@ -31,8 +31,7 @@ public class ThreadController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteThread(@PathVariable int id) {
-        threadService.deleteThread(id);
-        return new ResponseEntity("Thread deleted successfully.", HttpStatus.OK);
+        return threadService.deleteThread(id);
     }
 
 }
