@@ -24,13 +24,13 @@ public class PostController {
     }
 
     @PostMapping("/{threadId}/add")
-    public ResponseEntity<Post> savePost(@RequestBody Post post,
+    public ResponseEntity savePost(@RequestBody Post post,
                                          @PathVariable(value = "threadId") int threadId) {
-        return new ResponseEntity<>(postService.createPost(post, threadId), HttpStatus.CREATED);
+        return postService.createPost(post, threadId);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletePost(@PathVariable int id) {
+    public ResponseEntity deletePost(@PathVariable int id) {
         postService.deletePost(id);
         return new ResponseEntity("Post deleted successfully.", HttpStatus.OK);
     }

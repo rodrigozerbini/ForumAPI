@@ -37,7 +37,7 @@ public class UserControllerTest {
     @Test
     @Order(3)
     void createUSer() {
-        User user = new User("rapha@solera.com", "rapha", "password", null);
+        User user = new User("example@solera.com", "example", "password", null);
 
         ResponseEntity<User> userResponse = userController.saveUser(user);
         Assert.isTrue(userResponse.getStatusCodeValue() == 201, "User could not be created");

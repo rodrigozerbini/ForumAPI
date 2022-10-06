@@ -19,6 +19,8 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<ForumThread> threads = new HashSet<>();
 
+
+
     public String getEmail() {
         return email;
     }

@@ -24,6 +24,14 @@ public class ForumThread {
     @JsonIgnore
     private User user;
 
+    public Set<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
+    }
+
     @OneToMany(mappedBy = "thread", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Post> posts = new HashSet<>();
 

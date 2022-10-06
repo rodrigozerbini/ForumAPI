@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/forum/users")
 public class UserController {
@@ -17,8 +18,8 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/add")
-    public ResponseEntity<User> saveUser(@RequestBody User user) {
-        return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);
+    public ResponseEntity saveUser(@RequestBody User user) {
+        return userService.createUser(user);
     }
 
     @GetMapping
@@ -28,17 +29,12 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUser(@PathVariable int id) {
-        return ResponseEntity.ok(userService.getUser(id));
+        return userService.getUser(id);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable int id) {
-        User user = userService.getUser(id);
-        if(user != null) {
-            userService.deleteUser(id);
-            return new ResponseEntity("User deleted successfully.", HttpStatus.OK);
-        }
-        else return new ResponseEntity<>("User not found.", HttpStatus.NOT_FOUND);
+        return userService.deleteUser(id);
     }
 
 }

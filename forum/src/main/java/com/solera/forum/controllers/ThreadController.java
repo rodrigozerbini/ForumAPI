@@ -24,14 +24,13 @@ public class ThreadController {
     }
 
     @PostMapping("/users/{userId}")
-    public ResponseEntity<ForumThread> saveThread(@RequestBody ForumThread thread,
+    public ResponseEntity saveThread(@RequestBody ForumThread thread,
                                                   @PathVariable(value = "userId") int userId) {
-        ResponseEntity<ForumThread> newThread = new ResponseEntity<>(threadService.createThread(thread, userId), HttpStatus.CREATED);
-        return newThread;
+        return threadService.createThread(thread, userId);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteThread(@PathVariable int id) {
+    public ResponseEntity deleteThread(@PathVariable int id) {
         threadService.deleteThread(id);
         return new ResponseEntity("Thread deleted successfully.", HttpStatus.OK);
     }
