@@ -18,7 +18,6 @@ public class UserService {
     UserRepository userRepository;
 
     public ResponseEntity createUser(User user) {
-        Gson gson = new Gson();
         if(emailAlreadyExists((user.getEmail())))  {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("{\"msg\":\"There is already an account associated with this email.\"}");
@@ -60,5 +59,20 @@ public class UserService {
             }
         }
         return false;
+    }
+
+
+    public ResponseEntity logIn(String email, String password) {
+        List<User> users = userRepository.findAll();
+        for(User user : users) {
+            String userEmail = user.getEmail();
+            if(userEmail.equals(email)) {
+                if(user.getPassword().equals(password)) {
+                    return ResponseEntity.status(HttpStatus.OK).body("{\"msg\":\"Logged in successfully.\"}");
+                }
+                else ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"msg\":\"Login credentials incorrect.\"}");
+            }
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("{\"msg\":\"Login credentials incorrect.\"}");
     }
 }

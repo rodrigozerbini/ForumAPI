@@ -37,4 +37,8 @@ public class UserController {
         return userService.deleteUser(id);
     }
 
+    @PostMapping("/login")
+    public ResponseEntity logIn(@RequestBody User user) {
+        return userService.logIn(user.getEmail(), user.getPassword());
+    }
 }
