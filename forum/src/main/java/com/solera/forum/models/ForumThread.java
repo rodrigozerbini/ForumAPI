@@ -24,6 +24,9 @@ public class ForumThread {
     @JsonIgnore
     private User user;
 
+    @OneToMany(mappedBy = "thread", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Post> posts = new HashSet<>();
+
     public Set<Post> getPosts() {
         return posts;
     }
@@ -31,9 +34,6 @@ public class ForumThread {
     public void setPosts(Set<Post> posts) {
         this.posts = posts;
     }
-
-    @OneToMany(mappedBy = "thread", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Post> posts = new HashSet<>();
 
     public int getId() {
         return id;

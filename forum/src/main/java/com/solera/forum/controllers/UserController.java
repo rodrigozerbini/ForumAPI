@@ -16,14 +16,14 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @PostMapping("/add")
-    public ResponseEntity saveUser(@RequestBody User user) {
-        return userService.createUser(user);
-    }
-
     @GetMapping
     public List<User> getUsers() {
         return userService.getUsers();
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity saveUser(@RequestBody User user) {
+        return userService.createUser(user);
     }
 
     @GetMapping("/{id}")

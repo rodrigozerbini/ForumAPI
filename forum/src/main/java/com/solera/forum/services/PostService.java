@@ -50,6 +50,15 @@ public class PostService {
         return postRepository.findAll();
     }
 
+    public ResponseEntity getPostsByThread(int id) {
+        Optional<ForumThread> thread = threadRepository.findById(id);
+        if(thread.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("{\"msg\":\"Thread not found.\"}");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(thread.get().getPosts());
+    }
+
     public ResponseEntity getPost(int id) {
         Optional<Post> post = postRepository.findById(id);
         if(post.isEmpty()) {

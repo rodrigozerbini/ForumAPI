@@ -1,6 +1,5 @@
 package com.solera.forum.services;
 
-import com.google.gson.Gson;
 import com.solera.forum.repositories.UserRepository;
 import com.solera.forum.models.User;
 import org.springframework.beans.factory.annotation.Autowired;

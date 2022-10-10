@@ -24,6 +24,11 @@ public class PostController {
         return postService.getPosts();
     }
 
+    @GetMapping("threads/{threadId}")
+    public ResponseEntity getPostsByThread(@PathVariable int threadId) {
+        return postService.getPostsByThread(threadId);
+    }
+
     @PostMapping("/threads/{threadId}")
     public ResponseEntity savePost(@RequestBody Post post,
                                          @PathVariable(value = "threadId") int threadId) {
