@@ -5,8 +5,8 @@ import java.util.List;
 public class BannedWords {
 
     private static List<String> bannedWords =
-            List.of("fuck", "fucker", "dick", "pussy", "motherfucker", "anal", "ass",
-                    "bitch", "cunt", "shit", "whore", "vagina");
+            List.of("f***", "d***", "p****",
+                    "b****", "c***", "s***");
 
     public List<String> get() {
         return bannedWords;
