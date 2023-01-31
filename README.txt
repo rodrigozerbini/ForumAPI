@@ -72,7 +72,7 @@ Body example:
 
 {
     "title": "Banned test",
-    "body": "I think this will not work",
+    "body": "This should not work because has a banned word: d***",
     "image": "My image"
 }
 -----------------------------------------------------------------
