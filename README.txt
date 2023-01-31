@@ -28,7 +28,7 @@ http://localhost:8080/forum/users/login
 
 Body example:
 {
-    "email": "alex@solera.com",
+    "email": "alex@example.com",
     "password": "postman"
 }
 
@@ -39,7 +39,7 @@ http://localhost:8080/forum/users/add
 
 Body example:
 {
-    "email": "miguel@solera.com",
+    "email": "miguel@example.com",
     "username": "miguel",
     "password": "hi"
 }
@@ -72,7 +72,7 @@ Body example:
 
 {
     "title": "Banned test",
-    "body": "I think this will not   work motherfucker",
+    "body": "I think this will not work",
     "image": "My image"
 }
 -----------------------------------------------------------------
